@@ -1,0 +1,136 @@
+﻿@page "/CharacterCreator"
+@using System.Text.Json
+@inject HttpClient _http
+
+<div style="display: flex">
+    <div class="column-left">
+        <h2>Traits</h2>
+    </div>
+    
+    <div class="column-center">
+        <h2>Info</h2>
+    </div>
+    
+    <div class="column-right">
+        <h2>Stats</h2>
+    </div>
+</div>
+
+<div class="character-display">
+    <div class="column-container">
+        <div class="column-left">
+            @foreach (Trait trait in _playerSheet.Traits) {
+                switch (trait.Value) {
+                    case TraitValue.Good:
+                        <Tooltip Text=@trait.Effects>
+                            <p class="trait-good" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                        break;
+                    case TraitValue.Neutral:
+                        <Tooltip Text=@trait.Effects>
+                            <p class="trait-neutral" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                        break;
+                    case TraitValue.Bad:
+                        <Tooltip Text=@trait.Effects>
+                            <p class="trait-bad" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                        break;
+                    case TraitValue.Special:
+                        <Tooltip Text=@trait.Effects>
+                            <p class="trait-special" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                        break;
+                    case TraitValue.Ability:
+                        <Tooltip Text=@trait.Effects>
+                            <p class="trait-ability" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            <RadzenDropDown TValue="string" Data="_traitsList.Keys" Change="@(TraitDropdownSelect)" AllowFiltering="true" Style="border-radius: 0; border-color: grey; color: inherit; background: inherit; cursor: pointer"/>
+        </div>
+
+        <div class="column-center">
+            <p><input @bind="_playerSheet.Name"/></p>
+            <p><input @bind="_playerSheet.Pronoun"/></p>
+            <p><input @bind="_playerSheet.Species"/></p>
+            <p><input @bind="_playerSheet.Class"/></p>
+
+        </div>
+
+        <div class="column-right">
+            @foreach (string stat in _playerSheet.Stats.Keys) {
+                <p>
+                    <label>
+                        @stat - <input @bind='_playerSheet.Stats[stat]' style="width: 30px; text-align: center" maxlength="2" inputmode="numeric"/>
+                    </label>
+                </p>
+            }
+        </div>
+    </div>
+    
+    <img src="@_playerSheet.ImageUrl" alt="Image of the character @_playerSheet.Name." class="char-picture"/>
+    <input @bind="_playerSheet.ImageUrl" inputmode="url" class="char-picture"/>
+    
+</div>
+
+<textarea @bind="_playerSheet.Bio" style="width: 100%"></textarea>
+
+<div class="character-display">
+    
+</div>
+
+<hr/>
+
+<h2>Save/Load</h2>
+
+<textarea @bind="_saveLoadJson" style="width: 100%"></textarea>
+<button @onclick="ExportToJson">[Export]</button>
+<button @onclick="ImportFromJson">[Import]</button>
+@_importError
+
+@code {
+    private FortunaSheet _playerSheet = new();
+    private Dictionary<string, Trait> _traitsList = new() { { "Please wait...", new Trait(TraitValue.Special, "Impatient", "You didn't wait, you bastard! I asked nicely!") } };
+
+    private string _importError;
+    private string _saveLoadJson;
+    private static readonly JsonSerializerOptions Options = new(JsonSerializerDefaults.Web) { WriteIndented = true, IncludeFields = true };
+    
+    protected override async Task OnInitializedAsync()
+    {
+        Trait[] inputList = await _http.GetFromJsonAsync<Trait[]>("traits.json");
+        if (inputList != null) {
+            _traitsList = new Dictionary<string, Trait>();
+            foreach (Trait trait in inputList) {
+                _traitsList.Add(trait.Name, trait);
+            }
+        }
+    }
+
+    void TraitDropdownSelect(object value)
+    {
+        Trait traitToAdd = _traitsList[(string)value];
+        if (_playerSheet.Traits.Contains(traitToAdd)) { return; }
+        _playerSheet.Traits.Add(traitToAdd);
+        _playerSheet.Traits.Sort(Trait.CompareTraitValue);
+    }
+
+    void TraitRemove(Trait toRemove)
+    {
+        _playerSheet.Traits.Remove(toRemove);
+    }
+
+    void ExportToJson()
+    {
+        _saveLoadJson = JsonSerializer.Serialize(_playerSheet, typeof(FortunaSheet), Options);
+    }
+
+    void ImportFromJson()
+    {
+        try {
+            _playerSheet = JsonSerializer.Deserialize<FortunaSheet>(_saveLoadJson, Options);
+        }
+        catch (JsonException e) {
+            _importError = e.Message;
+        }
+    }
+}

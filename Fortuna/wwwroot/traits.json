@@ -1,0 +1,26 @@
+[
+  {
+    "Value": 0,
+    "Name": "Albino",
+    "Effects": "This character is whatever an albino in their species looks like.",
+    "Editable": false
+  },
+  {
+    "Value": 1,
+    "Name": "Optimistic",
+    "Effects": "This character doesn't lose morale as fast and can never hit negative morale. No matter what the situation, this character will keep their head up high and may raise the morale of others. The optimistic trait may drain sanity if the character is in a bad situation for a long amount of time.",
+    "Editable": false
+  },
+  {
+    "Value": 1,
+    "Name": "Auto-Translator",
+    "Effects": "This character can translate what a person is saying even without hearing the language before. Aftik only.",
+    "Editable": false
+  },
+  {
+    "Value": 2,
+    "Name": "Fears X",
+    "Effects": "This character is scared of whatever X is. This fear may be rational or irrational. Depending on the character their fear may be met with different responses, such as some may become aggressive when one tries to force a fear towards them.",
+    "Editable": true
+  }
+]

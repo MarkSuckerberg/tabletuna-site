@@ -1,0 +1,46 @@
+
+.trait-bad, .trait-good, .trait-neutral, .trait-special, .trait-ability {
+    cursor: pointer;
+}
+
+.trait-bad:hover, .trait-good:hover, .trait-neutral:hover, .trait-special:hover, .trait-ability:hover {
+    color: white;
+}
+
+.trait-bad {
+    color: red;
+}
+
+.trait-good {
+    color: lawngreen;
+}
+
+.trait-neutral {
+    color: blue;
+}
+
+.trait-special {
+    color: violet;
+}
+
+.trait-ability {
+    color: gold;
+}
+
+.char-picture {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 33.3%;
+}
+
+button {
+    font-family: "Poiret One", 'Times New Roman', Arial, sans-serif;
+    font-weight: 800;
+    border: none;
+    background: none;
+}
+
+button:hover {
+    color: blue;
+}
