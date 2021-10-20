@@ -6,11 +6,11 @@
     <div class="column-left">
         <h2>Traits</h2>
     </div>
-    
+
     <div class="column-center">
         <h2>Info</h2>
     </div>
-    
+
     <div class="column-right">
         <h2>Stats</h2>
     </div>
@@ -23,23 +23,28 @@
                 switch (trait.Value) {
                     case TraitValue.Good:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-good" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                            <p class="trait-good" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                        </Tooltip>
                         break;
                     case TraitValue.Neutral:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-neutral" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                            <p class="trait-neutral" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                        </Tooltip>
                         break;
                     case TraitValue.Bad:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-bad" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                            <p class="trait-bad" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                        </Tooltip>
                         break;
                     case TraitValue.Special:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-special" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                            <p class="trait-special" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                        </Tooltip>
                         break;
                     case TraitValue.Ability:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-ability" @onclick="() => TraitRemove(trait)">[@trait.Name]</p></Tooltip>
+                            <p class="trait-ability" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                        </Tooltip>
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -49,10 +54,18 @@
         </div>
 
         <div class="column-center">
-            <p><input @bind="_playerSheet.Name"/></p>
-            <p><input @bind="_playerSheet.Pronoun"/></p>
-            <p><input @bind="_playerSheet.Species"/></p>
-            <p><input @bind="_playerSheet.Class"/></p>
+            <p>
+                <input @bind="_playerSheet.Name"/>
+            </p>
+            <p>
+                <input @bind="_playerSheet.Pronoun"/>
+            </p>
+            <p>
+                <input @bind="_playerSheet.Species"/>
+            </p>
+            <p>
+                <input @bind="_playerSheet.Class"/>
+            </p>
 
         </div>
 
@@ -66,10 +79,10 @@
             }
         </div>
     </div>
-    
+
     <img src="@_playerSheet.ImageUrl" alt="Image of the character @_playerSheet.Name." class="char-picture"/>
     <input @bind="_playerSheet.ImageUrl" inputmode="url" class="char-picture"/>
-    
+
 </div>
 
 <textarea @bind="_playerSheet.Bio" style="width: 100%"></textarea>
@@ -80,11 +93,11 @@
     <div class="column-left">
         <h2>Inventory</h2>
     </div>
-    
+
     <div class="column-center">
         <h2>Moves</h2>
     </div>
-    
+
     <div class="column-right">
         <h2>Status</h2>
     </div>
@@ -102,7 +115,7 @@
                         <input @bind="_newItemText" style="border: dimgray 1px solid"/>
                     </td>
                 </tr>
-                
+
                 @foreach (string item in _playerSheet.Inventory) {
                     <tr>
                         <td>
@@ -125,7 +138,7 @@
                         <input @bind="_newMoveText" style="border: dimgray 1px solid"/>
                     </td>
                 </tr>
-                        
+
                 @foreach (string item in _playerSheet.Moves) {
                     <tr>
                         <td>
@@ -136,7 +149,7 @@
                         </td>
                     </tr>
                 }
-                
+
                 @foreach (Move move in _playerSheet.NewMoves) {
                     <tr>
                         <td>
@@ -153,11 +166,11 @@
         </div>
         <div class="column-right">
             <svg height="200" width="200" viewBox="0 0 200 200" style="width: 100%">
-                <circle r="100" cx="100" cy="100" fill="white" />
-                <line x1="100" y1="0" x2="100" y2="200" style="stroke:black; stroke-width: 2" /> 
-                <line x1="0" y1="100" x2="200" y2="100" style="stroke:black; stroke-width: 2" /> 
-                <line x1="100" y1="100" x2="50" y2="12.5" style="stroke:black; stroke-width: 2" /> 
-                <line x1="100" y1="100" x2="12.5" y2="50" style="stroke:black; stroke-width: 2" /> 
+                <circle r="100" cx="100" cy="100" fill="white"/>
+                <line x1="100" y1="0" x2="100" y2="200" style="stroke:black; stroke-width: 2"/>
+                <line x1="0" y1="100" x2="200" y2="100" style="stroke:black; stroke-width: 2"/>
+                <line x1="100" y1="100" x2="50" y2="12.5" style="stroke:black; stroke-width: 2"/>
+                <line x1="100" y1="100" x2="12.5" y2="50" style="stroke:black; stroke-width: 2"/>
             </svg>
         </div>
     </div>
@@ -182,7 +195,7 @@
 
     private string _newItemText = "";
     private string _newMoveText = "";
-    
+
     protected override async Task OnInitializedAsync()
     {
         Trait[] inputList = await _http.GetFromJsonAsync<Trait[]>("traits.json");
@@ -201,9 +214,15 @@
         _playerSheet.Traits.Add(traitToAdd);
         _playerSheet.Traits.Sort(Trait.CompareTraitValue);
     }
-    void TraitRemove(Trait toRemove) => _playerSheet.Traits.Remove(toRemove);
+    void TraitRemove(Trait toRemove)
+    {
+        _playerSheet.Traits.Remove(toRemove);
+    }
 
-    void ExportToJson() => _saveLoadJson = JsonSerializer.Serialize(_playerSheet, typeof(FortunaSheet), Options);
+    void ExportToJson()
+    {
+        _saveLoadJson = JsonSerializer.Serialize(_playerSheet, typeof(FortunaSheet), Options);
+    }
     void ImportFromJson()
     {
         try {
@@ -214,9 +233,21 @@
         }
     }
 
-    void RemoveItem(string target) => _playerSheet.Inventory.Remove(target);
-    void AddItem() => _playerSheet.Inventory.Add(_newItemText);
-    
-    void RemoveMove(string target) => _playerSheet.Moves.Remove(target);
-    void AddMove() => _playerSheet.Moves.Add(_newItemText);
+    void RemoveItem(string target)
+    {
+        _playerSheet.Inventory.Remove(target);
+    }
+    void AddItem()
+    {
+        _playerSheet.Inventory.Add(_newItemText);
+    }
+
+    void RemoveMove(string target)
+    {
+        _playerSheet.Moves.Remove(target);
+    }
+    void AddMove()
+    {
+        _playerSheet.Moves.Add(_newItemText);
+    }
 }

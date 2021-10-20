@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="50259fae-a44c-48d7-b1ae-fbaa68508652" name="localserver" url="https://fortuna.suckerberg.ga/">
+        <fileTransfer rootFolder="/opt/suckerberg.ga/Fortuna" accessType="SFTP" host="192.168.1.22" port="22" sshConfigId="8a61ae31-1e26-4a6a-869e-c5902f58448e" sshConfig="mark@192.168.1.22:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

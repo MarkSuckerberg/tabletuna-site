@@ -1,49 +1,48 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 namespace Fortuna.Shared
 {
     public class FortunaSheet
     {
         /// <summary>
-        /// The name of the character the sheet contains.
-        /// </summary>
-        public string Name = "Name";
-        /// <summary>
-        /// The pronouns of the character the sheet contains.
-        /// </summary>
-        public string Pronoun = "Pronoun";
-        /// <summary>
-        /// The race of the character the sheet contains. May be changed to a unique struct if codified?
-        /// </summary>
-        public string Species = "Race";
-        /// <summary>
-        /// The class of the character the sheet contains. May be changed to a unique struct if codified?
-        /// </summary>
-        public string Class = "Captain";
-        /// <summary>
-        /// The biographical information of the character the sheet contains.
+        ///     The biographical information of the character the sheet contains.
         /// </summary>
         public string Bio = "Put biographical information here.";
         /// <summary>
-        /// Image URL linking to a custom picture of the character the sheet contains.
+        ///     The class of the character the sheet contains. May be changed to a unique struct if codified?
+        /// </summary>
+        public string Class = "Captain";
+        /// <summary>
+        ///     Image URL linking to a custom picture of the character the sheet contains.
         /// </summary>
         public string ImageUrl = "/images/aftik.png";
-        
+
+        public List<string> Inventory = new();
+        public List<string> Moves = new();
         /// <summary>
-        /// A dictionary of the character's stats, with the key being a string that represents a stat.
+        ///     The name of the character the sheet contains.
+        /// </summary>
+        public string Name = "Name";
+
+        public List<Move> NewMoves = new();
+        /// <summary>
+        ///     The pronouns of the character the sheet contains.
+        /// </summary>
+        public string Pronoun = "Pronoun";
+        /// <summary>
+        ///     The race of the character the sheet contains. May be changed to a unique struct if codified?
+        /// </summary>
+        public string Species = "Race";
+
+        /// <summary>
+        ///     A dictionary of the character's stats, with the key being a string that represents a stat.
         /// </summary>
         public Dictionary<string, int> Stats = new() { { "Strength", 5 }, { "Intelligence", 5 }, { "Charisma", 5 }, { "Endurance", 5 }, { "Agility", 5 }, { "Luck", 5 } };
         /// <summary>
-        /// A list of the character's traits.
+        ///     A list of the character's traits.
         /// </summary>
         public List<Trait> Traits = new();
-
-        public List<Move> NewMoves = new();
-        
-        public List<string> Inventory = new();
-        public List<string> Moves = new();
     }
-    
+
     public struct Move
     {
         public Move(string name, string onFailMinor, string onSuccess)

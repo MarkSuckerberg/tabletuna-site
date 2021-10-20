@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="localserver" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="localserver">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/Fortuna.sln" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/App.razor" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Fortuna.csproj" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Pages/AftikDesigner.razor" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Pages/CharacterCreator.razor" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Pages/CharacterCreator.razor.css" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Pages/Index.razor" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Program.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Properties/launchSettings.json" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Shared/FortunaSheet.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Shared/MainLayout.razor" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Shared/MainLayout.razor.css" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Shared/NavMenu.razor" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Shared/NavMenu.razor.css" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Shared/Tooltip.razor" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Shared/Tooltip.razor.css" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/Shared/Trait.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/_Imports.razor" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/obj/Debug/net5.0/Fortuna.AssemblyInfo.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/app.css" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/bootstrap/bootstrap.min.css" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/bootstrap/bootstrap.min.css.map" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/open-iconic/FONT-LICENSE" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/open-iconic/ICON-LICENSE" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/open-iconic/README.md" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/open-iconic/font/fonts/open-iconic.eot" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/open-iconic/font/fonts/open-iconic.otf" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/open-iconic/font/fonts/open-iconic.svg" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/css/open-iconic/font/fonts/open-iconic.woff" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/favicon.ico" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/images/aftik.png" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/images/layer1.png" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/images/layer2.png" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/images/layer3.png" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/images/title.png" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/index.html" web="/" />
+            <mapping local="$PROJECT_DIR$/Fortuna/wwwroot/traits.json" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
