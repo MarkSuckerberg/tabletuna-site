@@ -90,18 +90,22 @@ h3 {
     border-bottom: 8px double #e6e6e6;
     padding-top: 10px;
     min-height: 400px;
+    font-size: 22px;
 }
 
 .character-display p {
     margin-bottom: 2px;
-    font-size: 22px;
+}
+
+.character-display button {
+    color: inherit;
 }
 
 .character-display input {
     color: #e6e6e6;
     background-color: #171717;
     border: 1px solid #171717;
-    font-size: 22px;
+    font-size: inherit;
     cursor: pointer;
     text-align: inherit;
 }

@@ -1,59 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 namespace Fortuna.Shared
 {
     public class FortunaSheet
     {
+        /// <summary>
+        /// The name of the character the sheet contains.
+        /// </summary>
         public string Name = "Name";
+        /// <summary>
+        /// The pronouns of the character the sheet contains.
+        /// </summary>
         public string Pronoun = "Pronoun";
+        /// <summary>
+        /// The race of the character the sheet contains. May be changed to a unique struct if codified?
+        /// </summary>
         public string Species = "Race";
+        /// <summary>
+        /// The class of the character the sheet contains. May be changed to a unique struct if codified?
+        /// </summary>
         public string Class = "Captain";
+        /// <summary>
+        /// The biographical information of the character the sheet contains.
+        /// </summary>
         public string Bio = "Put biographical information here.";
+        /// <summary>
+        /// Image URL linking to a custom picture of the character the sheet contains.
+        /// </summary>
         public string ImageUrl = "/images/aftik.png";
+        
+        /// <summary>
+        /// A dictionary of the character's stats, with the key being a string that represents a stat.
+        /// </summary>
         public Dictionary<string, int> Stats = new() { { "Strength", 5 }, { "Intelligence", 5 }, { "Charisma", 5 }, { "Endurance", 5 }, { "Agility", 5 }, { "Luck", 5 } };
+        /// <summary>
+        /// A list of the character's traits.
+        /// </summary>
         public List<Trait> Traits = new();
-    }
 
-    public enum TraitValue
-    {
-        Neutral,
-        Good,
-        Bad,
-        Special,
-        Ability
+        public List<Move> NewMoves = new();
+        
+        public List<string> Inventory = new();
+        public List<string> Moves = new();
     }
     
-    [Serializable]
-    public struct Trait
+    public struct Move
     {
-        public TraitValue Value { get; set; }
-        public string Name { get; set; }
-        public string Effects { get; set; }
-        public bool Editable { get; set; }
-        
-        public Trait(TraitValue value, string name, string effects, bool editable = false)
+        public Move(string name, string onFailMinor, string onSuccess)
         {
-            Value = value;
             Name = name;
-            Effects = effects;
-            Editable = editable;
+            OnFailMinor = onFailMinor;
+            OnSuccess = onSuccess;
         }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
-        public static int CompareTraitValue(Trait x, Trait y)
-        {
-            if ((int)x.Value > (int)y.Value) {
-                return 1;
-            } 
-            if ((int)x.Value < (int)y.Value) {
-                return -1;
-            }
-            return 0;
-        }
+        public string Name { get; set; }
+        public string OnFailMinor { get; set; }
+        public string OnSuccess { get; set; }
     }
 }

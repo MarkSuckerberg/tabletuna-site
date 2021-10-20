@@ -1,3 +1,12 @@
+@keyframes animateBackground {
+    from {
+        background-position: 0 0, 0 0, 0 0;
+    }
+    to {
+        background-position: -960px 0, -1920px 0, -3840px 0;
+    }
+}
+
 .page {
     position: relative;
     display: flex;
@@ -11,7 +20,11 @@
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: url("/images/layer1.png"), url("/images/layer2.png"), url("/images/layer3.png");
+    background-repeat: repeat, repeat, repeat;
+    background-blend-mode: lighten, lighten, lighten;
+    background-size: 480px 480px;
+    animation: animateBackground linear 120s infinite;
 }
 
 .top-row {
@@ -24,15 +37,15 @@
     align-items: center;
 }
 
-    .top-row ::deep a, .top-row .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-    }
+.top-row ::deep a, .top-row .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+}
 
-    .top-row a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.top-row a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {

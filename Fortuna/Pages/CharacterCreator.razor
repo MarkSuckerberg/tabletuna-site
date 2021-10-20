@@ -74,8 +74,93 @@
 
 <textarea @bind="_playerSheet.Bio" style="width: 100%"></textarea>
 
-<div class="character-display">
+<hr/>
+
+<div style="display: flex">
+    <div class="column-left">
+        <h2>Inventory</h2>
+    </div>
     
+    <div class="column-center">
+        <h2>Moves</h2>
+    </div>
+    
+    <div class="column-right">
+        <h2>Status</h2>
+    </div>
+</div>
+
+<div class="character-display">
+    <div class="column-container">
+        <div class="column-left">
+            <table>
+                <tr>
+                    <td>
+                        <button @onclick="AddItem">[✓]</button>
+                    </td>
+                    <td>
+                        <input @bind="_newItemText" style="border: dimgray 1px solid"/>
+                    </td>
+                </tr>
+                
+                @foreach (string item in _playerSheet.Inventory) {
+                    <tr>
+                        <td>
+                            <button @onclick="() => RemoveItem(item)">[🞪]</button>
+                        </td>
+                        <td>
+                            @item
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="column-center">
+            <table>
+                <tr>
+                    <td>
+                        <button @onclick="AddMove">[✓]</button>
+                    </td>
+                    <td>
+                        <input @bind="_newMoveText" style="border: dimgray 1px solid"/>
+                    </td>
+                </tr>
+                        
+                @foreach (string item in _playerSheet.Moves) {
+                    <tr>
+                        <td>
+                            <button @onclick="() => RemoveMove(item)">[🞪]</button>
+                        </td>
+                        <td>
+                            @item
+                        </td>
+                    </tr>
+                }
+                
+                @foreach (Move move in _playerSheet.NewMoves) {
+                    <tr>
+                        <td>
+                            <button @onclick="() => _playerSheet.NewMoves.Remove(move)">[🞪]</button>
+                        </td>
+                        <td>
+                            @move.Name
+                            @move.OnSuccess
+                            @move.OnFailMinor
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="column-right">
+            <svg height="200" width="200" viewBox="0 0 200 200" style="width: 100%">
+                <circle r="100" cx="100" cy="100" fill="white" />
+                <line x1="100" y1="0" x2="100" y2="200" style="stroke:black; stroke-width: 2" /> 
+                <line x1="0" y1="100" x2="200" y2="100" style="stroke:black; stroke-width: 2" /> 
+                <line x1="100" y1="100" x2="50" y2="12.5" style="stroke:black; stroke-width: 2" /> 
+                <line x1="100" y1="100" x2="12.5" y2="50" style="stroke:black; stroke-width: 2" /> 
+            </svg>
+        </div>
+    </div>
 </div>
 
 <hr/>
@@ -94,6 +179,9 @@
     private string _importError;
     private string _saveLoadJson;
     private static readonly JsonSerializerOptions Options = new(JsonSerializerDefaults.Web) { WriteIndented = true, IncludeFields = true };
+
+    private string _newItemText = "";
+    private string _newMoveText = "";
     
     protected override async Task OnInitializedAsync()
     {
@@ -113,17 +201,9 @@
         _playerSheet.Traits.Add(traitToAdd);
         _playerSheet.Traits.Sort(Trait.CompareTraitValue);
     }
+    void TraitRemove(Trait toRemove) => _playerSheet.Traits.Remove(toRemove);
 
-    void TraitRemove(Trait toRemove)
-    {
-        _playerSheet.Traits.Remove(toRemove);
-    }
-
-    void ExportToJson()
-    {
-        _saveLoadJson = JsonSerializer.Serialize(_playerSheet, typeof(FortunaSheet), Options);
-    }
-
+    void ExportToJson() => _saveLoadJson = JsonSerializer.Serialize(_playerSheet, typeof(FortunaSheet), Options);
     void ImportFromJson()
     {
         try {
@@ -133,4 +213,10 @@
             _importError = e.Message;
         }
     }
+
+    void RemoveItem(string target) => _playerSheet.Inventory.Remove(target);
+    void AddItem() => _playerSheet.Inventory.Add(_newItemText);
+    
+    void RemoveMove(string target) => _playerSheet.Moves.Remove(target);
+    void AddMove() => _playerSheet.Moves.Add(_newItemText);
 }
