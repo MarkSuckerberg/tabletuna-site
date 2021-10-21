@@ -98,7 +98,13 @@ h2, h3 {
 }
 
 .character-display button {
+    border: none;
+    background: none;
     color: inherit;
+}
+
+.character-display button:hover {
+    color: blue;
 }
 
 .character-display input {
