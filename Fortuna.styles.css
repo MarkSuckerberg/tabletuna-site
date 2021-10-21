@@ -89,7 +89,7 @@ button:hover[b-ochwitfwhz] {
 }
 
 .sidebar[b-tzdwoeqw9k] {
-    background-image: url("/images/layer1.png"), url("/images/layer2.png"), url("/images/layer3.png");
+    background-image: url("images/layer1.png"), url("images/layer2.png"), url("images/layer3.png");
     background-repeat: repeat, repeat, repeat;
     background-blend-mode: lighten, lighten, lighten;
     background-size: 480px 480px;
