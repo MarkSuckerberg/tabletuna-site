@@ -16,7 +16,7 @@ namespace Fortuna.Shared
         /// <summary>
         ///     Image URL linking to a custom picture of the character the sheet contains.
         /// </summary>
-        public string ImageUrl = "/images/aftik.png";
+        public string ImageUrl = "images/aftik.png";
 
         /// <summary>
         ///     A list of items in the character's inventory.
