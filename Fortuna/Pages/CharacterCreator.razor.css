@@ -45,6 +45,21 @@ button:hover {
     color: blue;
 }
 
+.move-flex-box {
+    display: flex;
+}
+
+.move-flex-box input, .move-flex-box p {
+    width: 30%;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.move-flex-box textarea {
+    width: 30%;
+}
+
 @media (max-width: 641px) {
     .char-picture {
         width: 75%;

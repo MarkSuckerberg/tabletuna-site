@@ -114,7 +114,7 @@
                         <button @onclick="AddItem">[✓]</button>
                     </td>
                     <td>
-                        <input @bind="_newItemText" style="border: dimgray 1px solid"/>
+                        <input @bind="_newItemText" style="border: dimgray 1px solid; width: 100%"/>
                     </td>
                 </tr>
 
@@ -131,40 +131,23 @@
             </table>
         </div>
         <div class="column-right">
-            <table style="text-align: left; width: 100%">
-                <tr>
-                    <td>
-                        <button @onclick="AddMove">[✓]</button>
-                    </td>
-                    <td>
-                        <input @bind="_newMoveText" style="border: dimgray 1px solid"/>
-                    </td>
-                    <td>
-                        On Success (9+)
-                    </td>
-                    <td>
-                        On Failure (7-9)
-                    </td>
-                </tr>
-
+            <div class="move-flex-box" style="flex-direction: column">
+                <div class="move-flex-box">
+                    <button @onclick="AddMove">[✓]</button>
+                    <input @bind="_newMoveText" style="border: dimgray 1px solid"/>
+                    <p>On Success (9+)</p>
+                    <p>On Failure (7-9)</p>
+                </div>
                 @foreach (string name in _playerSheet.Moves.Keys) {
                     Move move = _playerSheet.Moves[name];
-                    <tr>
-                        <td>
-                            <button @onclick="() => _playerSheet.Moves.Remove(name)">[🞪]</button>
-                        </td>
-                        <td>
-                            @name
-                        </td>
-                        <td>
-                            <textarea @bind="move.OnSuccess"></textarea>
-                        </td>
-                        <td>
-                            <textarea @bind="move.OnFailMinor"></textarea>
-                        </td>
-                    </tr>
+                    <div class="move-flex-box">
+                        <button @onclick="() => _playerSheet.Moves.Remove(name)">[🞪]</button>
+                        <p>@name</p>
+                        <textarea @bind="move.OnSuccess"></textarea>
+                        <textarea @bind="move.OnFailMinor"></textarea>
+                    </div>
                 }
-            </table>
+            </div>
         </div>
         @*<div class="column-right">
             <svg height="200" width="200" viewBox="0 0 200 200" style="width: 100%">
@@ -253,6 +236,7 @@
 
     private void AddMove()
     {
+        if (_playerSheet.Moves.ContainsKey(_newMoveText)) { return; }
         _playerSheet.Moves.Add(_newMoveText, new Move());
     }
 }
