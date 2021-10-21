@@ -47,6 +47,6 @@ button:hover {
 
 @media (max-width: 641px) {
     .char-picture {
-        width: 50%;
+        width: 75%;
     }
 }
