@@ -21,14 +21,12 @@ jobs:
     - name: Publish
       run: dotnet publish Fortuna/Fortuna.csproj -c Release -o release --nologo
       
-    - name: Update base tag
-      run: sed -i 's/<base href="\/"\/>/<base href="\/fortuna-site\/"\/>/g' release/wwwroot/index.html
-      
-    - name: Add .nojekyll file
-      run: touch release/wwwroot/.nojekyll
-      
-    - name: Copy index.html to 404.html
-      run: cp release/wwwroot/index.html release/wwwroot/404.html
+    - name: Prepare release
+      run: |
+        sed -i 's/<base href="\/"\/>/<base href="\/fortuna-site\/"\/>/g' release/wwwroot/index.html
+        touch release/wwwroot/.nojekyll
+        cp release/wwwroot/index.html release/wwwroot/404.html
+        echo fortuna.suckerberg.ga > release/wwwroot/CNAME
       
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.5
