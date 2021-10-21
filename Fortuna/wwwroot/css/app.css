@@ -119,3 +119,13 @@ h2, h3 {
 .character-display input:hover {
     border: 1px solid grey;
 }
+
+.character-display textarea {
+    font-size: 18px;
+}
+
+.character-display tr, td {
+    align-content: center;
+    border-bottom: 1px solid grey;
+}
+

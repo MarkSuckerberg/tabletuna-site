@@ -96,13 +96,13 @@
         <h2>Inventory</h2>
     </div>
 
-    <div class="column-center">
+    <div class="column-right">
         <h2>Moves</h2>
     </div>
 
-    <div class="column-right">
+    @*<div class="column-right">
         <h2>Status</h2>
-    </div>
+    </div>*@
 </div>
 
 <div class="character-display">
@@ -130,8 +130,8 @@
                 }
             </table>
         </div>
-        <div class="column-center">
-            <table>
+        <div class="column-right">
+            <table style="text-align: left; width: 100%">
                 <tr>
                     <td>
                         <button @onclick="AddMove">[✓]</button>
@@ -139,34 +139,34 @@
                     <td>
                         <input @bind="_newMoveText" style="border: dimgray 1px solid"/>
                     </td>
+                    <td>
+                        On Success (9+)
+                    </td>
+                    <td>
+                        On Failure (7-9)
+                    </td>
                 </tr>
 
-                @foreach (string item in _playerSheet.Moves) {
+                @foreach (string name in _playerSheet.NewMoves.Keys) {
+                    Move move = _playerSheet.NewMoves[name];
                     <tr>
                         <td>
-                            <button @onclick="() => RemoveMove(item)">[🞪]</button>
+                            <button @onclick="() => _playerSheet.NewMoves.Remove(name)">[🞪]</button>
                         </td>
                         <td>
-                            @item
-                        </td>
-                    </tr>
-                }
-
-                @foreach (Move move in _playerSheet.NewMoves) {
-                    <tr>
-                        <td>
-                            <button @onclick="() => _playerSheet.NewMoves.Remove(move)">[🞪]</button>
+                            @name
                         </td>
                         <td>
-                            @move.Name
-                            @move.OnSuccess
-                            @move.OnFailMinor
+                            <textarea @bind="move.OnSuccess"></textarea>
+                        </td>
+                        <td>
+                            <textarea @bind="move.OnFailMinor"></textarea>
                         </td>
                     </tr>
                 }
             </table>
         </div>
-        <div class="column-right">
+        @*<div class="column-right">
             <svg height="200" width="200" viewBox="0 0 200 200" style="width: 100%">
                 <circle r="100" cx="100" cy="100" fill="white"/>
                 <line x1="100" y1="0" x2="100" y2="200" style="stroke:black; stroke-width: 2"/>
@@ -174,7 +174,7 @@
                 <line x1="100" y1="100" x2="50" y2="12.5" style="stroke:black; stroke-width: 2"/>
                 <line x1="100" y1="100" x2="12.5" y2="50" style="stroke:black; stroke-width: 2"/>
             </svg>
-        </div>
+        </div>*@
     </div>
 </div>
 
@@ -212,19 +212,19 @@
         }
     }
 
-    void TraitDropdownSelect(object value)
+    private void TraitDropdownSelect(object value)
     {
         Trait traitToAdd = _traitsList[(string)value];
         if (_playerSheet.Traits.Contains(traitToAdd)) { return; }
         _playerSheet.Traits.Add(traitToAdd);
         _playerSheet.Traits.Sort(Trait.CompareTraitValue);
     }
-    void TraitRemove(Trait toRemove)
+    private void TraitRemove(Trait toRemove)
     {
         _playerSheet.Traits.Remove(toRemove);
     }
 
-    async void ExportToJson()
+    private async Task ExportToJson()
     {
         await BlazorDownloadFileService.DownloadFileFromText($"{_playerSheet.Name}-{DateTime.Now:MM-dd-yy_hh-mm-ss}.json", JsonSerializer.Serialize(_playerSheet, typeof(FortunaSheet), Options), "text/json");
     }
@@ -241,21 +241,18 @@
         }
     }
 
-    void RemoveItem(string target)
+    private void RemoveItem(string target)
     {
         _playerSheet.Inventory.Remove(target);
     }
-    void AddItem()
+    
+    private void AddItem()
     {
         _playerSheet.Inventory.Add(_newItemText);
     }
 
-    void RemoveMove(string target)
+    private void AddMove()
     {
-        _playerSheet.Moves.Remove(target);
-    }
-    void AddMove()
-    {
-        _playerSheet.Moves.Add(_newItemText);
+        _playerSheet.NewMoves.Add(_newMoveText, new Move());
     }
 }
