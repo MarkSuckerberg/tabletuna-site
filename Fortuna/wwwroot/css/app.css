@@ -63,7 +63,8 @@ a:hover, .btn-link:hover {
 .column-left, .column-right, .column-center {
     flex: max-content;
     flex-shrink: unset;
-    padding: 0 20px 0 20px;
+    flex-direction: row;
+    padding: 0 20px 10px 20px;
     min-width: 33.3%;
 }
 
@@ -88,7 +89,7 @@ h2, h3 {
     color: #e6e6e6;
     border-top: 8px double #e6e6e6;
     border-bottom: 8px double #e6e6e6;
-    padding-top: 10px;
+    padding: 10px 0 10px 0;
     min-height: 400px;
     font-size: 22px;
 }
@@ -129,3 +130,18 @@ h2, h3 {
     border-bottom: 1px solid grey;
 }
 
+@media (max-width: 641px) {
+    .column-container {
+        flex-direction: column;
+        padding-bottom: 10px;
+    }
+
+    .column-left, .column-right, .column-center {
+        flex: max-content;
+        flex-shrink: unset;
+        padding: unset;
+        min-width: unset;
+        text-align: center;
+        border-bottom: 1px grey solid;
+    }
+}

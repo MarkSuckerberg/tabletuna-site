@@ -44,3 +44,9 @@ button {
 button:hover {
     color: blue;
 }
+
+@media (max-width: 641px) {
+    .char-picture {
+        width: 50%;
+    }
+}

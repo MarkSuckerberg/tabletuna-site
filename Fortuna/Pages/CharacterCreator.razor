@@ -147,11 +147,11 @@
                     </td>
                 </tr>
 
-                @foreach (string name in _playerSheet.NewMoves.Keys) {
-                    Move move = _playerSheet.NewMoves[name];
+                @foreach (string name in _playerSheet.Moves.Keys) {
+                    Move move = _playerSheet.Moves[name];
                     <tr>
                         <td>
-                            <button @onclick="() => _playerSheet.NewMoves.Remove(name)">[🞪]</button>
+                            <button @onclick="() => _playerSheet.Moves.Remove(name)">[🞪]</button>
                         </td>
                         <td>
                             @name
@@ -253,6 +253,6 @@
 
     private void AddMove()
     {
-        _playerSheet.NewMoves.Add(_newMoveText, new Move());
+        _playerSheet.Moves.Add(_newMoveText, new Move());
     }
 }

@@ -19,7 +19,7 @@ namespace Fortuna.Shared
         public string ImageUrl = "/images/aftik.png";
 
         /// <summary>
-        /// A list of items in the character's inventory.
+        ///     A list of items in the character's inventory.
         /// </summary>
         public List<string> Inventory = new();
         
@@ -28,7 +28,11 @@ namespace Fortuna.Shared
         /// </summary>
         public string Name = "Name";
 
-        public Dictionary<string, Move> NewMoves = new();
+        /// <summary>
+        ///     The moves this character can use.
+        /// </summary>
+        public Dictionary<string, Move> Moves = new();
+        
         /// <summary>
         ///     The pronouns of the character the sheet contains.
         /// </summary>
