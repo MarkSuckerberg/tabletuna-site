@@ -226,7 +226,7 @@
 
     async void ExportToJson()
     {
-        await BlazorDownloadFileService.DownloadFileFromText($"{_playerSheet.Name}-{DateTime.Now:MM-dd-yy_hh:mm:ss}.json", JsonSerializer.Serialize(_playerSheet, typeof(FortunaSheet), Options), "text/json");
+        await BlazorDownloadFileService.DownloadFileFromText($"{_playerSheet.Name}-{DateTime.Now:MM-dd-yy_hh-mm-ss}.json", JsonSerializer.Serialize(_playerSheet, typeof(FortunaSheet), Options), "text/json");
     }
 
     private async Task ImportFromJson(InputFileChangeEventArgs args)
