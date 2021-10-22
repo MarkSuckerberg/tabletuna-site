@@ -56,7 +56,7 @@ namespace Fortuna.Shared
 
     public class Move
     {
-        public string OnFailMinor { get; set; }
+        public string OnSuccessPartial { get; set; }
         public string OnSuccess { get; set; }
     }
 }

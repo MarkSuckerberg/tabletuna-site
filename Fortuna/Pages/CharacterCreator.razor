@@ -135,7 +135,7 @@
                 <div class="move-flex-box">
                     <button @onclick="AddMove">[✓]</button>
                     <input @bind="_newMoveText" style="border: dimgray 1px solid"/>
-                    <p>On Success (9+)</p>
+                    <p>On Success (10+)</p>
                     <p>On Failure (7-9)</p>
                 </div>
                 @foreach (string name in _playerSheet.Moves.Keys) {
@@ -144,7 +144,7 @@
                         <button @onclick="() => _playerSheet.Moves.Remove(name)">[🞪]</button>
                         <p>@name</p>
                         <textarea @bind="move.OnSuccess"></textarea>
-                        <textarea @bind="move.OnFailMinor"></textarea>
+                        <textarea @bind="move.OnSuccessPartial"></textarea>
                     </div>
                 }
             </div>
