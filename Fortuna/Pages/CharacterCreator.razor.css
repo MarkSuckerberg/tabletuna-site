@@ -8,23 +8,23 @@
 }
 
 .trait-bad {
-    color: red;
+    color: #ff0000;
 }
 
 .trait-good {
-    color: green;
+    color: #00C000;
 }
 
 .trait-neutral {
-    color: blue;
+    color: #00B6B6;
 }
 
 .trait-special {
-    color: purple;
+    color: #c27ba0;
 }
 
 .trait-ability {
-    color: yellow;
+    color: #ffff00;
 }
 
 .char-picture {
