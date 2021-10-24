@@ -1,7 +1,8 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css?family=Gill+Sans|Poiret+One');
 
 html, body {
-    font-family: 'Gill Sans MT', 'Times New Roman', serif;
+    font-family: 'Gill Sans', 'Times New Roman', serif;
     color: #212121;
 }
 

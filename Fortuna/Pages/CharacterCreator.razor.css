@@ -12,7 +12,7 @@
 }
 
 .trait-good {
-    color: lawngreen;
+    color: green;
 }
 
 .trait-neutral {
@@ -20,11 +20,11 @@
 }
 
 .trait-special {
-    color: violet;
+    color: purple;
 }
 
 .trait-ability {
-    color: gold;
+    color: yellow;
 }
 
 .char-picture {
