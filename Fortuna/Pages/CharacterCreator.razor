@@ -3,6 +3,7 @@
 @using System.Text.Json
 @using System.IO
 @inject HttpClient _http
+@inject IJSRuntime _jsRuntime
 
 <div style="display: flex">
     <div class="column-left">
@@ -25,27 +26,27 @@
                 switch (trait.Value) {
                     case TraitValue.Good:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-good" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                            <p class="trait-good" @onclick="() => _playerSheet.Traits.Remove(trait)">[@trait.Name]</p>
                         </Tooltip>
                         break;
                     case TraitValue.Neutral:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-neutral" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                            <p class="trait-neutral" @onclick="() => _playerSheet.Traits.Remove(trait)">[@trait.Name]</p>
                         </Tooltip>
                         break;
                     case TraitValue.Bad:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-bad" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                            <p class="trait-bad" @onclick="() => _playerSheet.Traits.Remove(trait)">[@trait.Name]</p>
                         </Tooltip>
                         break;
                     case TraitValue.Special:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-special" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                            <p class="trait-special" @onclick="() => _playerSheet.Traits.Remove(trait)">[@trait.Name]</p>
                         </Tooltip>
                         break;
                     case TraitValue.Ability:
                         <Tooltip Text=@trait.Effects>
-                            <p class="trait-ability" @onclick="() => TraitRemove(trait)">[@trait.Name]</p>
+                            <p class="trait-ability" @onclick="() => _playerSheet.Traits.Remove(trait)">[@trait.Name]</p>
                         </Tooltip>
                         break;
                     default:
@@ -99,10 +100,6 @@
     <div class="column-right">
         <h2>Moves</h2>
     </div>
-
-    @*<div class="column-right">
-        <h2>Status</h2>
-    </div>*@
 </div>
 
 <div class="character-display">
@@ -149,15 +146,6 @@
                 }
             </div>
         </div>
-        @*<div class="column-right">
-            <svg height="200" width="200" viewBox="0 0 200 200" style="width: 100%">
-                <circle r="100" cx="100" cy="100" fill="white"/>
-                <line x1="100" y1="0" x2="100" y2="200" style="stroke:black; stroke-width: 2"/>
-                <line x1="0" y1="100" x2="200" y2="100" style="stroke:black; stroke-width: 2"/>
-                <line x1="100" y1="100" x2="50" y2="12.5" style="stroke:black; stroke-width: 2"/>
-                <line x1="100" y1="100" x2="12.5" y2="50" style="stroke:black; stroke-width: 2"/>
-            </svg>
-        </div>*@
     </div>
 </div>
 
@@ -165,8 +153,9 @@
 
 <h2>Save/Load</h2>
 
+<button @onclick="CopySheetToClipboard">[Copy]</button>
 <button @onclick="ExportToJson">[Export]</button>
-<InputFile OnChange="ImportFromJson">[Import File]</InputFile>
+<InputFile OnChange="ImportFromJson">[Import]</InputFile>
 @_importError
 
 @code {
@@ -174,14 +163,20 @@
     [Inject]
     public IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
 
+    /// The sheet currently being edited
     private FortunaSheet _playerSheet = new();
+    /// A list of traits retrieved from traits.json with the key being the trait's 'name' and the value being the trait itself.
     private Dictionary<string, Trait> _traitsList = new() { { "Please wait...", new Trait(TraitValue.Special, "Impatient", "You didn't wait, you bastard! I asked nicely!") } };
 
-    private string _importError;
+    /// Error that occurred while importing, shows up to the right of the import button
+    private string _importError = "";
 
+    /// Options used to (de)serialize the json file exports.
     private static readonly JsonSerializerOptions Options = new(JsonSerializerDefaults.Web) { WriteIndented = true, IncludeFields = true };
 
+    /// Text in the new item text input box
     private string _newItemText = "";
+    /// Text in the new move text input box
     private string _newMoveText = "";
 
     protected override async Task OnInitializedAsync()
@@ -195,6 +190,9 @@
         }
     }
 
+    /**
+     * Called whenever the trait selection dropdown is used. Value is the string name of the trait.
+     */
     private void TraitDropdownSelect(object value)
     {
         Trait traitToAdd = _traitsList[(string)value];
@@ -202,16 +200,18 @@
         _playerSheet.Traits.Add(traitToAdd);
         _playerSheet.Traits.Sort(Trait.CompareTraitValue);
     }
-    private void TraitRemove(Trait toRemove)
-    {
-        _playerSheet.Traits.Remove(toRemove);
-    }
 
+    /**
+     * Exports the character sheet to a .json file, for later loading with ImportFromJson().
+     */
     private async Task ExportToJson()
     {
         await BlazorDownloadFileService.DownloadFileFromText($"{_playerSheet.Name}-{DateTime.Now:MM-dd-yy_hh-mm-ss}.json", JsonSerializer.Serialize(_playerSheet, typeof(FortunaSheet), Options), "text/json");
     }
 
+    /**
+     * Imports a character sheet from an exported .json file created by ExportToJson().
+     */
     private async Task ImportFromJson(InputFileChangeEventArgs args)
     {
         Stream stream = args.File.OpenReadStream();
@@ -224,19 +224,61 @@
         }
     }
 
+    /**
+     * Removes item specified in argument target.
+     */
     private void RemoveItem(string target)
     {
         _playerSheet.Inventory.Remove(target);
     }
     
+    /**
+     * Adds a new item from the text specified in _newItemText
+     */
     private void AddItem()
     {
         _playerSheet.Inventory.Add(_newItemText);
     }
 
+    /**
+     * Checks for duplicates before adding a move from the text specified in _newMoveText.
+     */
     private void AddMove()
     {
         if (_playerSheet.Moves.ContainsKey(_newMoveText)) { return; }
         _playerSheet.Moves.Add(_newMoveText, new Move());
+    }
+
+    /**
+     * Returns a markdown-compatible version of the character sheet. Doesn't include inventory or moves.
+     */
+    private string GetMarkdownSheet()
+    {
+        string retValue = $"# {_playerSheet.Name} #\n\nSpecies: {_playerSheet.Species}\nPronouns: {_playerSheet.Pronoun}\nClass: {_playerSheet.Class}\n";
+
+        Dictionary<TraitValue, List<Trait>> traitsLists = new();
+
+        foreach (Trait trait in _playerSheet.Traits) {
+            if(!traitsLists.ContainsKey(trait.Value)) {
+                traitsLists.Add(trait.Value, new List<Trait> {trait});
+                continue;
+            }
+            traitsLists[trait.Value].Add(trait);
+        }
+
+        retValue += "\n## Traits ##\n";
+        retValue = traitsLists.Keys.Aggregate(retValue, (current, traitVal) => current + $"### {traitVal} ###\n{string.Join('\n', traitsLists[traitVal])}\n\n");
+        retValue += "\n## Stats ##\n";
+        retValue = _playerSheet.Stats.Keys.Aggregate(retValue, (current, stat) => current + $"{stat}: {_playerSheet.Stats[stat]}\n");
+        return $"{retValue}\nBio: {_playerSheet.Bio}";
+    }
+
+    /**
+     * Copies the markdown-ified sheet into the user's clipboard by using JS interop (JS function found in js/clipboard.js)
+     */
+    private async Task CopySheetToClipboard()
+    {
+        string result = GetMarkdownSheet();
+        await _jsRuntime.InvokeVoidAsync("clipboardCopy.copyText", result);
     }
 }
