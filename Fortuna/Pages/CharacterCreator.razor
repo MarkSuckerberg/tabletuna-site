@@ -231,7 +231,7 @@
     {
         _playerSheet.Inventory.Remove(target);
     }
-    
+
     /**
      * Adds a new item from the text specified in _newItemText
      */
@@ -259,8 +259,8 @@
         Dictionary<TraitValue, List<Trait>> traitsLists = new();
 
         foreach (Trait trait in _playerSheet.Traits) {
-            if(!traitsLists.ContainsKey(trait.Value)) {
-                traitsLists.Add(trait.Value, new List<Trait> {trait});
+            if (!traitsLists.ContainsKey(trait.Value)) {
+                traitsLists.Add(trait.Value, new List<Trait> { trait });
                 continue;
             }
             traitsLists[trait.Value].Add(trait);

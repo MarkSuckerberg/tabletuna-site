@@ -5,15 +5,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="BlazorDownloadFile" Version="2.1.6" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.9" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.9" PrivateAssets="all" />
-        <PackageReference Include="Radzen.Blazor" Version="3.11.8" />
-        <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+        <PackageReference Include="BlazorDownloadFile" Version="2.1.6"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.9"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.9" PrivateAssets="all"/>
+        <PackageReference Include="Radzen.Blazor" Version="3.11.8"/>
+        <PackageReference Include="System.Net.Http.Json" Version="5.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
+        <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json"/>
     </ItemGroup>
 
 </Project>

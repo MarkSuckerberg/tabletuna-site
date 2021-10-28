@@ -446,6 +446,7 @@
 
     [Inject]
     public IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
+
     // im so sorry
     private string GetAftikSvg()
     {
@@ -848,9 +849,10 @@
 </g>
 </svg>";
     }
-    
-    async void YouWouldNotDownloadAnAftik() {
+
+    async void YouWouldNotDownloadAnAftik()
+    {
         await BlazorDownloadFileService.DownloadFileFromText("aftik.svg", GetAftikSvg(), "image/svg");
     }
-    
+
 }
