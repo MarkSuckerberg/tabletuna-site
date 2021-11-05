@@ -23,7 +23,6 @@ jobs:
       
     - name: Prepare release
       run: |
-        sed -i 's/<base href="\/"\/>/<base href="\/fortuna-site\/"\/>/g' release/wwwroot/index.html
         touch release/wwwroot/.nojekyll
         cp release/wwwroot/index.html release/wwwroot/404.html
         echo fortuna.suckerberg.ga > release/wwwroot/CNAME
