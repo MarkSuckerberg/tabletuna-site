@@ -9,23 +9,23 @@
 }
 
 .trait-bad[b-ochwitfwhz] {
-    color: red;
+    color: #ff0000;
 }
 
 .trait-good[b-ochwitfwhz] {
-    color: lawngreen;
+    color: #00C000;
 }
 
 .trait-neutral[b-ochwitfwhz] {
-    color: blue;
+    color: #00B6B6;
 }
 
 .trait-special[b-ochwitfwhz] {
-    color: violet;
+    color: #c27ba0;
 }
 
 .trait-ability[b-ochwitfwhz] {
-    color: gold;
+    color: #ffff00;
 }
 
 .char-picture[b-ochwitfwhz] {
