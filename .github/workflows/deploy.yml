@@ -26,6 +26,8 @@ jobs:
         touch release/wwwroot/.nojekyll
         cp release/wwwroot/index.html release/wwwroot/404.html
         echo fortuna.suckerberg.ga > release/wwwroot/CNAME
+        .github/get-traits.py
+        mv traits.json release/wwwroot
       
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.5
