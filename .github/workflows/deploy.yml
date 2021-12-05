@@ -26,6 +26,7 @@ jobs:
         touch release/wwwroot/.nojekyll
         cp release/wwwroot/index.html release/wwwroot/404.html
         echo fortuna.suckerberg.ga > release/wwwroot/CNAME
+        pip3 install beautifulsoup4
         .github/get-traits.py
         mv traits.json release/wwwroot
       
