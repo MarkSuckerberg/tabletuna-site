@@ -1,0 +1,106 @@
+[FORTUNA RESOURCE AND STARTER PACK]
+===================================================
+August 2017 Version. All rights reserved.
+By Gimeurcookie
+===================================================
+.
+.
+.
+Contact info
+===================================================
+contactus@cosmosdex.com
+===================================================
+.
+.
+.
+Before you use
+===================================================
+- Please do not claim any of the work contained is done by you.
+- If using the assets any place outside of Eagletime.com please credit the assets/base to Gimeurcookie.
+- If using the assets any place outside of Eagletime.com please provide a link to the Cosmosdex.com.
+- Do not use for commercial purposes or monetary gain. Ex: Recoloring the sprites and then selling them.
+- If you don't agree to all of the above these assets cannot be used.
+===================================================
+.
+.
+.
+Folder Layout
+===================================================
+Art: Contains the most important files. Includes the Main Menu and the file you do character speech in.
+.
+.
+BG: Contains premade backgrounds. Is meant to hold backgrounds for you.
+.
+.
+Characters: Is meant to hold your character files.
+CharactersAI: Holds your character Adobe illustrator files. Comes with premades.
+CharactersPS: Holds your character Photoshop files. Comes with premades.
+CharactersPNG: Holds your character emotion PNG files. Comes with premades.
+PatronIcons: Holds your patron icon files. Comes with premades.
+.
+.
+Vector Assets: Holds any item vector assets you may have.
+AI Files: Holds your vector assets AI files. Has one premade with many item assets on it.
+Single pieces: For loose single asset pieces for use in AI and walk sprite sections.
+.
+.
+Walk Sprites: Holds your walk sprites. Comes with premade AI files.
+.
+.
+After Effects: I'm going to be frank here. It's kind of a mess. If you know AE you know what to do.
+===================================================
+.
+.
+.
+F.A.Q
+===================================================
+Q. Fonts are missing.
+A. You will have to find a way to obtain the fonts as this pack only includes assets made by me.
+.
+Q. Which fonts do I need to get?
+A. Gill Sans, Futura, and Poiret One
+You can get Poiret One on Google fonts. ( https://fonts.google.com/specimen/Poiret+One )
+.
+Q. There's no brushes in here.
+A. This pack only includes assets made by me and most of the brushes I use are not made by me.
+The main brushes I use are "Deharme BRUSHES" ( https://deharme.deviantart.com/art/Deharme-BRUSHES-Photoshop-CC-435479570 )
+As well as Kyle Brush Megapack ( https://www.kylebrush.com/#brushes )
+.
+Q. Will this be updated one day?
+A. I hope man, I love sharing this stuff.
+===================================================
+.
+.
+.
+Final Notes
+===================================================
+- Robots are pretty cool.
+- Aliens are nice.
+- Thanks for reading this readme it means a lot to me.
+===================================================
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+Do not share the below poem in public, but only under hush words, for they are cursed.
+===================================================
+When man was tossed from the skies for trying to steal it, his skin, shadow, and mind had left him.
+His material goods would be turned to dust.
+Man was returned to land, in bliss, while his skin attempted to steal the skies once again.
+===================================================
