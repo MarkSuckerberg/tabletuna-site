@@ -1,5 +1,4 @@
 /* /Pages/CharacterCreator.razor.rz.scp.css */
-
 .trait-bad[b-ochwitfwhz], .trait-good[b-ochwitfwhz], .trait-neutral[b-ochwitfwhz], .trait-special[b-ochwitfwhz], .trait-ability[b-ochwitfwhz] {
     cursor: pointer;
 }
@@ -32,7 +31,17 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: 33.3%;
     width: 33.3%;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.char-url-input[b-ochwitfwhz] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 button[b-ochwitfwhz] {
@@ -63,6 +72,7 @@ button:hover[b-ochwitfwhz] {
 
 @media (max-width: 641px) {
     .char-picture[b-ochwitfwhz] {
+        height: 300px;
         width: 75%;
     }
 }
