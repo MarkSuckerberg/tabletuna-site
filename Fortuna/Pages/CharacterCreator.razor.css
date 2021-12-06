@@ -1,4 +1,3 @@
-
 .trait-bad, .trait-good, .trait-neutral, .trait-special, .trait-ability {
     cursor: pointer;
 }
@@ -31,7 +30,17 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: 33.3%;
     width: 33.3%;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.char-url-input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 button {
@@ -62,6 +71,7 @@ button:hover {
 
 @media (max-width: 641px) {
     .char-picture {
+        height: 300px;
         width: 75%;
     }
 }

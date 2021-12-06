@@ -146,6 +146,12 @@ h2, h3 {
     }
 }
 
+@media (pointer:coarse) {
+    .character-display input {
+        border: 1px solid grey;
+    }
+}
+
 /* cyrillic */
 @font-face {
     font-family: 'Gill Sans';
