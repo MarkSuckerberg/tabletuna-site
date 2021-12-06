@@ -53,7 +53,7 @@
                         throw new ArgumentOutOfRangeException();
                 }
             }
-            <RadzenDropDown TValue="string" Data="_traitsList.Keys" Change="@(TraitDropdownSelect)" AllowFiltering="true" Style="border-radius: 0; border-color: grey; color: inherit; background: inherit; cursor: pointer"/>
+            <RadzenDropDown TValue="string" Data="_traitsList.Keys" Change="@(TraitDropdownSelect)" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterDelay="250" AllowVirtualization="true" Style="border-radius: 0; border-color: grey; color: inherit; background: inherit; cursor: pointer"/>
         </div>
 
         <div class="column-center">
