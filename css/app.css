@@ -94,6 +94,15 @@ h2, h3 {
     font-size: 22px;
 }
 
+.character-display a {
+    color: inherit;
+}
+
+.character-display a:hover {
+    color: blue;
+    text-decoration: none;
+}
+
 .character-display p {
     margin-bottom: 2px;
 }
@@ -102,6 +111,7 @@ h2, h3 {
     border: none;
     background: none;
     color: inherit;
+    padding: 0;
 }
 
 .character-display button:hover {
