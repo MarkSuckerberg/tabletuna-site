@@ -27,7 +27,7 @@ for elem in list_elems:
         print(f"error! {elem}")
 
     result["name"] = elem.find("a").string.strip("[]")
-    result["effects"] = elem.find("p").string or re.sub('<[^<]+?>', '', str(elem.find("p")))
+    result["effects"] = elem.find("p").string or str(elem.find("p")) #re.sub('<[^<]+?>', '', str(elem.find("p"))) #Uncomment if you want to strip all html tags from the strings.
 
     list_traits.append(result)
 
