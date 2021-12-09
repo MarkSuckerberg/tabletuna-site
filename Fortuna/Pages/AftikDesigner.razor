@@ -1,5 +1,6 @@
 ﻿@page "/AftikDesigner"
 @using BlazorDownloadFile
+@using System.Text
 <h2>Aftik Designer</h2>
 
 <div class="character-display">
@@ -854,7 +855,7 @@
 
     async void YouWouldNotDownloadAnAftik()
     {
-        await BlazorDownloadFileService.DownloadFileFromText("aftik.svg", GetAftikSvg(), "image/svg");
+        await BlazorDownloadFileService.DownloadFileFromText("aftik.svg", GetAftikSvg(), Encoding.Default, "image/svg");
     }
 
 }
