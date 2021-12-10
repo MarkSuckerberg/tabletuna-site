@@ -44,9 +44,14 @@ namespace Fortuna.Shared
         public string Species = "Race";
 
         /// <summary>
+        ///     The max number of stat points that the character sheet can have.
+        /// </summary>
+        public const int MaxStatPoints = 26;
+        
+        /// <summary>
         ///     A dictionary of the character's stats, with the key being a string that represents a stat.
         /// </summary>
-        public Dictionary<string, int> Stats = new() { { "Strength", 5 }, { "Intelligence", 5 }, { "Charisma", 5 }, { "Endurance", 5 }, { "Agility", 5 }, { "Luck", 5 } };
+        public Dictionary<string, int> Stats = new() { { "Strength", 4 }, { "Intelligence", 4 }, { "Charisma", 4 }, { "Endurance", 4 }, { "Agility", 4 }, { "Luck", 4 } };
 
         /// <summary>
         ///     A list of the character's traits.

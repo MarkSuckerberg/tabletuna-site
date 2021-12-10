@@ -55,32 +55,33 @@
                 }
             }
             <RadzenDropDown TValue="string" Data="_traitsList.Keys" Change="@(TraitDropdownSelect)" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterDelay="250" AllowVirtualization="true" Style="border-radius: 0; border-color: grey; color: inherit; background: inherit; cursor: pointer"/>
+            <br/>
+            <button @onclick="RandomizeTraits">Random</button>
         </div>
 
         <div class="column-center">
             <p>
                 <input @bind="_playerSheet.Name"/>
-            </p>
-            <p>
+                <br/>
                 <input @bind="_playerSheet.Pronoun"/>
-            </p>
-            <p>
+                <br/>
                 <input @bind="_playerSheet.Species"/>
-            </p>
-            <p>
+                <br/>
                 <input @bind="_playerSheet.Class"/>
             </p>
-
         </div>
 
         <div class="column-right">
-            @foreach (string stat in _playerSheet.Stats.Keys) {
-                <p>
+            <p>
+                @foreach (string stat in _playerSheet.Stats.Keys) {
                     <label>
                         @stat - <input @bind='_playerSheet.Stats[stat]' style="width: 30px; text-align: center" maxlength="2" inputmode="numeric"/>
                     </label>
-                </p>
-            }
+                    <br/>
+                }
+            </p>
+            <p style="@(_playerSheet.Stats.Values.Sum() > FortunaSheet.MaxStatPoints ? "color: red" : "")">Total - @_playerSheet.Stats.Values.Sum()/@FortunaSheet.MaxStatPoints</p>
+            <button @onclick="RandomizeStats">Random</button>
         </div>
     </div>
 
@@ -168,7 +169,12 @@
     private FortunaSheet _playerSheet = new();
     /// A list of traits retrieved from traits.json with the key being the trait's 'name' and the value being the trait itself.
     private Dictionary<string, Trait> _traitsList = new() { { "Please wait...", new Trait(TraitValue.Special, "Impatient", "You didn't wait, you bastard! I asked nicely!") } };
-
+    /// A dictionary of trait lists, with the key being the value the list contains the traits of.
+    private readonly Dictionary<TraitValue, List<Trait>> _traitsValueDict = new() { { TraitValue.Ability, new List<Trait>() }, { TraitValue.Bad, new List<Trait>() }, { TraitValue.Good, new List<Trait>() }, { TraitValue.Neutral, new List<Trait>() }, { TraitValue.Special, new List<Trait>() } };
+    
+    /// Random instance for use in randomization.
+    private readonly Random _random = new();
+    
     /// Error that occurred while importing, shows up to the right of the import button
     private string _importError = "";
 
@@ -187,6 +193,7 @@
             _traitsList = new Dictionary<string, Trait>();
             foreach (Trait trait in inputList) {
                 _traitsList.Add(trait.Name, trait);
+                _traitsValueDict[trait.Value].Add(trait);
             }
         }
     }
@@ -281,5 +288,57 @@
     {
         string result = GetMarkdownSheet();
         await _jsRuntime.InvokeVoidAsync("clipboardCopy.copyText", result);
+    }
+
+    /**
+     * Randomizes the trait selection, giving three neutral, three good, two bad, and a 1/25 chance of a special trait.
+     */
+    private void RandomizeTraits()
+    {
+        _playerSheet.Traits = new List<Trait>(); //Wipe it clean, start again
+
+        for (int i = 0; i < 3; i++) { //TODO: Find way to make this not hardcoded for each different value, somehow
+            _playerSheet.Traits.Add(GetRandomTrait(TraitValue.Neutral));
+        }
+        
+        for (int i = 0; i < 3; i++) {
+            _playerSheet.Traits.Add(GetRandomTrait(TraitValue.Good));
+        }
+        
+        for (int i = 0; i < 2; i++) {
+            _playerSheet.Traits.Add(GetRandomTrait(TraitValue.Bad));
+        }
+
+        if (_random.Next(25) == 1) {
+            _playerSheet.Traits.Add(GetRandomTrait(TraitValue.Special));
+        }
+        
+        _playerSheet.Traits.Sort(Trait.CompareTraitValue);
+    }
+
+    /**
+     * Returns a random trait with the specified TraitValue.
+     */
+    private Trait GetRandomTrait(TraitValue desiredValue)
+    {
+        return _traitsValueDict[desiredValue][_random.Next(_traitsValueDict[desiredValue].Count)];
+    }
+
+    /**
+     * Randomizes the stats, never actually getting to 26, getting near but never going over it.
+     */
+    private void RandomizeStats()
+    {
+        List<int> randomValues = new();
+        
+        for (int i = 0; i < _playerSheet.Stats.Count; i++) {
+            randomValues.Add(_random.Next(10));
+        }
+
+        int j = 0;
+        foreach(string stat in _playerSheet.Stats.Keys) {
+            _playerSheet.Stats[stat] = (int)((float)randomValues[j] / randomValues.Sum() * FortunaSheet.MaxStatPoints); //TODO: Make this always return a sum of 26 somehow. Also simplify it.
+            j++;
+        }
     }
 }
