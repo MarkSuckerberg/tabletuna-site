@@ -11,7 +11,7 @@ namespace Fortuna.Shared
         /// <summary>
         ///     The class of the character the sheet contains. May be changed to a unique struct if codified?
         /// </summary>
-        public string Class = "Captain";
+        public string Class = "Job/Role";
 
         /// <summary>
         ///     Image URL linking to a custom picture of the character the sheet contains.
