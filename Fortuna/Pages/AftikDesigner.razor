@@ -451,8 +451,7 @@
     public IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
 
     // im so sorry
-    private string GetAftikSvg()
-    {
+    private string GetAftikSvg() {
         return $@"<?xml version='1.0' encoding='UTF-8' standalone='no'?>
 
 <svg
@@ -853,8 +852,7 @@
 </svg>";
     }
 
-    async void YouWouldNotDownloadAnAftik()
-    {
+    async void YouWouldNotDownloadAnAftik() {
         await BlazorDownloadFileService.DownloadFileFromText("aftik.svg", GetAftikSvg(), Encoding.Default, "image/svg");
     }
 

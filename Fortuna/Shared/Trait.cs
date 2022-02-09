@@ -1,40 +1,35 @@
 ﻿using System;
-namespace Fortuna.Shared
-{
-    public struct Trait
-    {
-        public TraitValue Value { get; set; }
-        public string Name { get; set; }
-        public string Effects { get; set; }
-        //public bool Editable { get; set; }
+namespace Fortuna.Shared; 
 
-        public Trait(TraitValue value, string name, string effects, bool editable = false)
-        {
-            Value = value;
-            Name = name;
-            Effects = effects;
-            //Editable = editable;
-        }
+public struct Trait {
+    public TraitValue Value { get; set; }
+    public string Name { get; set; }
 
-        public override string ToString()
-        {
-            return Name;
-        }
+    public string Effects { get; set; }
+    //public bool Editable { get; set; }
 
-        public static int CompareTraitValue(Trait x, Trait y)
-        {
-            if ((int)x.Value > (int)y.Value) return 1;
-            if ((int)x.Value < (int)y.Value) return -1;
-            return string.Compare(x.Name, y.Name, StringComparison.CurrentCulture);
-        }
+    public Trait(TraitValue value, string name, string effects, bool editable = false) {
+        Value = value;
+        Name = name;
+        Effects = effects;
+        //Editable = editable;
     }
 
-    public enum TraitValue
-    {
-        Neutral,
-        Good,
-        Bad,
-        Special,
-        Ability
+    public override string ToString() {
+        return Name;
     }
+
+    public static int CompareTraitValue(Trait x, Trait y) {
+        if ((int)x.Value > (int)y.Value) return 1;
+        if ((int)x.Value < (int)y.Value) return -1;
+        return string.Compare(x.Name, y.Name, StringComparison.CurrentCulture);
+    }
+}
+
+public enum TraitValue {
+    Neutral,
+    Good,
+    Bad,
+    Special,
+    Ability
 }
