@@ -157,7 +157,11 @@
 
 <button @onclick="CopySheetToClipboard">[Copy]</button>
 <button @onclick="ExportToJson">[Export]</button>
-<InputFile OnChange="ImportFromJson">[Import]</InputFile>
+<span class="file-input-container">
+    <label class="button" for="upload">[Upload]</label>
+    <InputFile OnChange="ImportFromJson" hidden id="upload">[Import]</InputFile>
+</span>
+
 @_importError
 
 @code {
